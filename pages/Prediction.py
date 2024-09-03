@@ -173,9 +173,13 @@ if st.button("Submit"):
     st.write(f"Churn Tahmini: {prediction[0]}")
 
     st.dataframe(online_results_df)
+    X_test5=pd.read_csv('X_test5.csv')
 
-    with open("explainerr.pkl", "rb") as explainer:
-        explainer = pickle.load(explainer)
+    explainer_last = shap.Explainer(rf_model)
+    shap_val_class_last = explainer_last(X_test5)
+
+   #with open("explainerr.pkl", "rb") as explainer:
+   #    explainer = pickle.load(explainer)
 
     with open("test_features.pkl", "rb") as test_features:
         test_features = pickle.load(test_features)
@@ -195,7 +199,7 @@ if st.button("Submit"):
     #shap_values = explainer(test_data)
     test_data = pd.concat([test_features, df_encoded], ignore_index=True)
 
-    shap_values = explainer(test_data)
+    shap_values = explainer_last(test_data)
 
 
     fig, ax = plt.subplots(figsize=(10, 6))
