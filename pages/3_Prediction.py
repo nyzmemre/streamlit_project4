@@ -10,7 +10,7 @@ from sklearn.preprocessing import OneHotEncoder
 from constants.functions import page_header_infos
 
 page_header_infos(title='Predict')
-
+st.title('Prediction')
 #öncelikle kullanıcıdan alacağımız bilgilerin giriş ekrannı tasarlayacağız.
 tenure = st.number_input("Tenure (Month)", help="Please enter Tenure as a number!", min_value=0, format='%d', value=0)
 #tenure değişkeni sayı olarak girilmelidir. bu yüzden number_input kullandım.
