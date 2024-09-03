@@ -1,10 +1,7 @@
 pandas
 matplotlib
-matplotlib.pyplot
 streamlit
 shap
-pickle
 scikit-learn
 plotly
 joblib
-plotly.express
