@@ -173,11 +173,12 @@ if st.button("Submit"):
 
     st.dataframe(online_results_df)
 
-    with open("explainer.pkl", "r") as explainer:
+    with open("explainer.pkl", "rb") as explainer:
         explainer = pickle.load(explainer)
 
-    with open("test_features.pkl", "r") as test_features:
+    with open("test_features.pkl", "rb") as test_features:
         test_features = pickle.load(test_features)
+
     
     
     #test_data = pd.concat([test_features, input_data], ignore_index=True)
