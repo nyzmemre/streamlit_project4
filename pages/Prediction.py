@@ -12,30 +12,31 @@ from constants.functions import page_header_infos
 page_header_infos(title='Predict')
 
 #öncelikle kullanıcıdan alacağımız bilgilerin giriş ekrannı tasarlayacağız.
-tenure = st.number_input("Tenure", help="Please enter Tenure as a number!", min_value=0, format='%d', value=0)
+tenure = st.number_input("Tenure (Month)", help="Please enter Tenure as a number!", min_value=0, format='%d', value=0)
 #tenure değişkeni sayı olarak girilmelidir. bu yüzden number_input kullandım.
 #min_value en az değeri gösterir. format ise , den sonra sayı gösterip göstermemeyi düzenler.
 #'%d' dersem 1 olarak görünür. '%.2f' ondalıklı göterilir. '%.0f' yuvarlar. '%,d' çok haneli sayıları virgülle ayırır.
 #index=0 ve value=0 tüm değerlere atandı. sebebi null hatası oluşmamasıdır. 
 #bu değerleri atayarak sayfa açılışında tüm alanlara değer atamış oluyoruz.
 #CouponUsed değeri 1 olarak atanıyor. Çünkü bölme işleminin paydası. 0 değerini alırsa hata alırız.
-preferredLoginDevice=st.selectbox('PreferredLoginDevice', ['Mobile Phone', 'Computer'],index=0)
-cityTier=st.number_input("CityTier", help="Please enter CityTier as a number!",min_value=0, format='%d', value=0)
-warehouseToHome=st.number_input("WarehouseToHome", help="Please enter WarehouseToHome as a number!",min_value=0, format='%d', value=0)
-preferredPaymentMode=st.selectbox('PreferredPaymentMode', ['Debit Card', 'UPI', 'Credit Card', 'Cash on Delivery', 'E wallet'],index=0)
+preferredLoginDevice=st.selectbox('Preferred Login Device', ['Mobile Phone', 'Computer'],index=0)
+#cityTier=st.number_input("City Tier (1-3)", help="Please enter CityTier as a number!",min_value=1, max_value=3, format='%d', value=1)
+cityTier=st.selectbox('City Tier', ['Most developed cities', 'Moderately developed cities', 'Least developed cities'],index=0)
+warehouseToHome=st.number_input("Warehouse To Home (KM)", help="Please enter WarehouseToHome as a number!",min_value=0, format='%d', value=0)
+preferredPaymentMode=st.selectbox('Preferred Payment Mode', ['Debit Card', 'UPI', 'Credit Card', 'Cash on Delivery', 'E wallet'],index=0)
 gender=st.selectbox('Gender', ['Female', 'Male'],index=0)
-hourSpendOnApp=st.number_input("HourSpendOnApp", help="Please enter HourSpendOnApp as a number!",min_value=0, format='%d', value=0)
-numberOfDeviceRegistered=st.number_input("NumberOfDeviceRegistered", help="Please enter NumberOfDeviceRegistered as a number!",min_value=0, format='%d')
-preferedOrderCat=st.selectbox('PreferedOrderCat', ['Laptop & Accessory', 'Mobile Phone', 'Fashion','Grocery','Others'],index=0)
-satisfactionScore=st.selectbox('SatisfactionScore', ['1', '2', '3','4','5'],index=0)
-maritalStatus=st.selectbox('MaritalStatus', ['Single', 'Divorced', 'Married'],index=0)
-numberOfAddress=st.number_input("NumberOfAddress", help="Please enter NumberOfAddress as a number!",min_value=0, format='%d', value=0)
-complain=st.selectbox('complain', ['0', '1'],index=0)
-orderAmountHikeFromlastYear=st.number_input("OrderAmountHikeFromlastYear", help="Please enter OrderAmountHikeFromlastYear as a number!",min_value=0, format='%d', value=0)
-couponUsed=st.number_input("CouponUsed", help="Please enter CouponUsed as a number!",min_value=1, format='%d', value=1)
-orderCount=st.number_input("OrderCount", help="Please enter OrderCount as a number!",min_value=0, format='%d', value=0)
-daySinceLastOrder=st.number_input("DaySinceLastOrder", help="Please enter DaySinceLastOrder as a number!",min_value=0, format='%d', value=0)
-cashbackAmount=st.number_input("CashbackAmount", help="Please enter CashbackAmount as a number!",min_value=0, format='%d', value=0)
+hourSpendOnApp=st.number_input("Hour Spend On App", help="Please enter HourSpendOnApp as a number!",min_value=0, format='%d', value=0)
+numberOfDeviceRegistered=st.number_input("Number Of Device Registered", help="Please enter NumberOfDeviceRegistered as a number!",min_value=0, format='%d')
+preferedOrderCat=st.selectbox('Prefered Order Category', ['Laptop & Accessory', 'Mobile Phone', 'Fashion','Grocery','Others'],index=0)
+satisfactionScore=st.selectbox('Satisfaction Score', ['1', '2', '3','4','5'],index=0)
+maritalStatus=st.selectbox('Marital Status', ['Single', 'Divorced', 'Married'],index=0)
+numberOfAddress=st.number_input("Number Of Address", help="Please enter NumberOfAddress as a number!",min_value=0, format='%d', value=0)
+complain=st.selectbox('Complaint', ['0', '1'],index=0)
+orderAmountHikeFromlastYear=st.number_input("Order Amount Hike From Last Year", help="Please enter OrderAmountHikeFromlastYear as a number!",min_value=0, format='%d', value=0)
+couponUsed=st.number_input("Coupon Used", help="Please enter CouponUsed as a number!",min_value=1, format='%d', value=1)
+orderCount=st.number_input("Order Count", help="Please enter OrderCount as a number!",min_value=0, format='%d', value=0)
+daySinceLastOrder=st.number_input("Day SinceLast Order", help="Please enter DaySinceLastOrder as a number!",min_value=0, format='%d', value=0)
+cashbackAmount=st.number_input("Cashback Amount", help="Please enter CashbackAmount as a number!",min_value=0, format='%d', value=0)
 
 #couponPerOrder=couponUsed/orderCount
 #bu işlem şimdilik geçersiz. çünkü initial value ya 1 değerini verdik.
@@ -44,6 +45,13 @@ if(orderCount!=0):
 else:
     couponPerOrder=0
 
+if(cityTier=='Most developed cities'):
+    cityTierVal=1
+elif(cityTier=='Moderately developed cities'):
+    cityTierVal=2
+else:
+    cityTierVal=3
+
 #modelimizi yüklüyoruz. random_forest_model.pkl dosyasını notebookdaki son modelimden getiriyorum.
 rf_model=load('random_forest_model.pkl')
 
@@ -51,7 +59,7 @@ rf_model=load('random_forest_model.pkl')
 input_data = pd.DataFrame({
     'Tenure': [tenure],
     'PreferredLoginDevice':[preferredLoginDevice],
-    'CityTier':[cityTier],
+    'CityTier':[cityTierVal],
     'WarehouseToHome':[warehouseToHome],
     'PreferredPaymentMode':[preferredPaymentMode],
     'Gender':[gender],
@@ -153,7 +161,7 @@ if st.button("Submit"):
     online_results_df = pd.DataFrame({
          'Tenure': [tenure],
  'PreferredLoginDevice':[preferredLoginDevice],
- 'CityTier':[cityTier],
+ 'CityTier':[cityTierVal],
  'WarehouseToHome':[warehouseToHome],
  'PreferredPaymentMode':[preferredPaymentMode],
  'Gender':[gender],
@@ -178,8 +186,8 @@ if st.button("Submit"):
     explainer_last = shap.Explainer(rf_model)
     shap_val_class_last = explainer_last(X_test5)
 
-   #with open("explainerr.pkl", "rb") as explainer:
-   #    explainer = pickle.load(explainer)
+    #with open("explainer3.pkl", "rb") as explainer:
+    #   explainer = pickle.load(explainer)
 
     with open("test_features.pkl", "rb") as test_features:
         test_features = pickle.load(test_features)
@@ -200,6 +208,8 @@ if st.button("Submit"):
     test_data = pd.concat([test_features, df_encoded], ignore_index=True)
 
     shap_values = explainer_last(test_data)
+    #shap_values = explainer_last(test_data)
+
 
 
     fig, ax = plt.subplots(figsize=(10, 6))
