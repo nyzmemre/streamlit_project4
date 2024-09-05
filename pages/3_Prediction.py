@@ -12,31 +12,31 @@ from constants.functions import page_header_infos
 page_header_infos(title='Predict')
 st.title('Prediction')
 #öncelikle kullanıcıdan alacağımız bilgilerin giriş ekrannı tasarlayacağız.
-tenure = st.number_input("Tenure (Month)", help="Please enter Tenure as a number!", min_value=0, format='%d', value=0)
+tenure = st.number_input("Tenure (Month)", help="Tenure of customer in organization. Please enter an integer number!", min_value=0, format='%d', value=0)
 #tenure değişkeni sayı olarak girilmelidir. bu yüzden number_input kullandım.
 #min_value en az değeri gösterir. format ise , den sonra sayı gösterip göstermemeyi düzenler.
 #'%d' dersem 1 olarak görünür. '%.2f' ondalıklı göterilir. '%.0f' yuvarlar. '%,d' çok haneli sayıları virgülle ayırır.
 #index=0 ve value=0 tüm değerlere atandı. sebebi null hatası oluşmamasıdır. 
 #bu değerleri atayarak sayfa açılışında tüm alanlara değer atamış oluyoruz.
 #CouponUsed değeri 1 olarak atanıyor. Çünkü bölme işleminin paydası. 0 değerini alırsa hata alırız.
-preferredLoginDevice=st.selectbox('Preferred Login Device', ['Mobile Phone', 'Computer'],index=0)
+preferredLoginDevice=st.selectbox('Preferred Login Device', ['Mobile Phone', 'Computer'], help='Please select from the list!',index=0)
 #cityTier=st.number_input("City Tier (1-3)", help="Please enter CityTier as a number!",min_value=1, max_value=3, format='%d', value=1)
-cityTier=st.selectbox('City Tier', ['Most developed cities', 'Moderately developed cities', 'Least developed cities'],index=0)
-warehouseToHome=st.number_input("Warehouse To Home (KM)", help="Please enter WarehouseToHome as a number!",min_value=0, format='%d', value=0)
-preferredPaymentMode=st.selectbox('Preferred Payment Mode', ['Debit Card', 'UPI', 'Credit Card', 'Cash on Delivery', 'E wallet'],index=0)
-gender=st.selectbox('Gender', ['Female', 'Male'],index=0)
-hourSpendOnApp=st.number_input("Hour Spend On App", help="Please enter HourSpendOnApp as a number!",min_value=0, format='%d', value=0)
-numberOfDeviceRegistered=st.number_input("Number Of Device Registered", help="Please enter NumberOfDeviceRegistered as a number!",min_value=0, format='%d')
-preferedOrderCat=st.selectbox('Prefered Order Category', ['Laptop & Accessory', 'Mobile Phone', 'Fashion','Grocery','Others'],index=0)
-satisfactionScore=st.selectbox('Satisfaction Score', ['1', '2', '3','4','5'],index=0)
-maritalStatus=st.selectbox('Marital Status', ['Single', 'Divorced', 'Married'],index=0)
-numberOfAddress=st.number_input("Number Of Address", help="Please enter NumberOfAddress as a number!",min_value=0, format='%d', value=0)
-complain=st.selectbox('Complaint', ['0', '1'],index=0)
-orderAmountHikeFromlastYear=st.number_input("Order Amount Hike From Last Year", help="Please enter OrderAmountHikeFromlastYear as a number!",min_value=0, format='%d', value=0)
-couponUsed=st.number_input("Coupon Used", help="Please enter CouponUsed as a number!",min_value=1, format='%d', value=1)
-orderCount=st.number_input("Order Count", help="Please enter OrderCount as a number!",min_value=0, format='%d', value=0)
-daySinceLastOrder=st.number_input("Day SinceLast Order", help="Please enter DaySinceLastOrder as a number!",min_value=0, format='%d', value=0)
-cashbackAmount=st.number_input("Cashback Amount", help="Please enter CashbackAmount as a number!",min_value=0, format='%d', value=0)
+cityTier=st.selectbox('City Tier', ['Developed / Big cities', 'Moderately developed / Medium size cities','Developing / Small cities'], help='Please select from the list!',index=0)
+warehouseToHome=st.number_input("Warehouse To Home (KM)", help="Distance in between warehouse to home of customer. Please enter an integer number!",min_value=0, format='%d', value=0)
+preferredPaymentMode=st.selectbox('Preferred Payment Mode', ['Debit Card', 'UPI', 'Credit Card', 'Cash on Delivery', 'E wallet'],help='Preferred payment method of customer. Please select from the list!',index=0)
+gender=st.selectbox('Gender', ['Female', 'Male'],help='Gender of customer. Please select from the list!',index=0)
+hourSpendOnApp=st.number_input("Hours Spend On App / Website", help="Please enter Hour Spend On App as a number!",min_value=0, format='%d', value=0)
+numberOfDeviceRegistered=st.number_input("Number Of Device Registered", help="Total number of devices registered on particular customer!",min_value=0, format='%d')
+preferedOrderCat=st.selectbox('Prefered Order Category (Last Month)', ['Laptop & Accessory', 'Mobile Phone', 'Fashion','Grocery','Others'],help='Preferred order category of customer in last month!',index=0)
+satisfactionScore=st.selectbox('Satisfaction Score (1-5)', ['1', '2', '3','4','5'],index=0)
+maritalStatus=st.selectbox('Marital Status', ['Single', 'Divorced', 'Married'],help='Please select from the list!',index=0)
+numberOfAddress=st.number_input("Number Of Address", help="Total number of addresses added on particular customer!",min_value=0, format='%d', value=0)
+complain=st.selectbox('Complaints Received or Not (Last Month)', ['0', '1'],help='Any complaint has been raised in last month!',index=0)
+orderAmountHikeFromlastYear=st.number_input("Order Amount Hike From Last Year", help="Percentage increase in order from last year. Please enter an integer number!",min_value=0, format='%d', value=0)
+couponUsed=st.number_input("Total Coupons Used (Last Month)", help="Total number of coupons used in last month!",min_value=1, format='%d', value=1)
+orderCount=st.number_input("# of Orders (last month)", help="Total number of orders placed in last month!",min_value=0, format='%d', value=0)
+daySinceLastOrder=st.number_input("# Days Since Last Order", help="Day since last order by customer!",min_value=0, format='%d', value=0)
+cashbackAmount=st.number_input("Avg Cashback Amount (last month -$)", help="Average cashback in last month. Please enter an integer number!",min_value=0, format='%d', value=0)
 
 #couponPerOrder=couponUsed/orderCount
 #bu işlem şimdilik geçersiz. çünkü initial value ya 1 değerini verdik.
@@ -45,9 +45,9 @@ if(orderCount!=0):
 else:
     couponPerOrder=0
 
-if(cityTier=='Most developed cities'):
+if(cityTier=='Developed / Big cities'):
     cityTierVal=1
-elif(cityTier=='Moderately developed cities'):
+elif(cityTier=='Moderately developed / Medium size cities'):
     cityTierVal=2
 else:
     cityTierVal=3
