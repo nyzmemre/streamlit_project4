@@ -7,8 +7,8 @@ st.title("About Us")
 team_members = [
     {
         "name": "Gizem Özmen",
-        "role": "Data Scientist | Industrial Engineer",
-        "bio": "Gizem works as an Industrial Engineer. She is interested in data science and data analysis.",
+        "role": "Industrial Engineer (BSc) | Data Scientist",
+        "bio": "Gizem is an expert in Quality Management Systems and Lean Manufacturing within the Automotive and FMCG sectors. She is highly motivated to continuously develop herself, with a particular focus on Data Science and Machine Learning.",
         "linkedin": "https://www.linkedin.com/in/gizem-ozmen-b5458637/",
         "image": "images/gizem.png"
     },
@@ -22,8 +22,8 @@ team_members = [
     
     {
         "name": "Mehmet Emre ÖZ",
-        "role": "Instructor | Mobile Developer | Data Scientist",
-        "bio": "Emre works in the field of education. He develops mobile applications and is interested in data sciense and machine learning.",
+        "role": "Instructor | Software Developer | Data Scientist",
+        "bio": "Emre works in the field of education. He develops mobile applications and is interested in data science and machine learning.",
         "linkedin": "https://www.linkedin.com/in/nyzmemre/",
         "image": "images/emre.jpeg"
     }

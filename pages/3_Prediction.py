@@ -309,3 +309,9 @@ if uploaded_file is not None:
     pred_df.columns = pred_columns
     pred_df["prediction"] = pred_df["prediction"].apply(lambda pred: "0" if pred==0 else "1")
     st.dataframe(pred_df, hide_index=True)
+
+
+st.markdown('***Sample Data Frame***')
+df=pd.read_csv('ecommerce_last.csv')
+
+st.dataframe(df.head(5))
